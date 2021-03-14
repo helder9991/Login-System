@@ -1,10 +1,13 @@
 import express from 'express';
 
+// Inicia o banco de dados
+import './database';
+
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     return res.json({
         message: 'ok',
     });
