@@ -9,12 +9,15 @@ class User {
     name: string;
 
     @Column()
-    password: string;
+    email: string;
 
     @Column()
-    phones: [
+    senha: string;
+
+    @Column()
+    telefones: [
         {
-            phone: string;
+            numero: string;
             ddd: string;
         },
     ];
