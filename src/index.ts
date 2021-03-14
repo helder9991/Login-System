@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     return res.json({
         message: 'ok',
     });
