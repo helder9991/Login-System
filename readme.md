@@ -1,6 +1,6 @@
 # Versões dos softwares utilizados:
   node v15.11.0  
-  npm v7.6.0
+  npm v7.6.0  
   mongo v4.4.4
 
 # Introdução
