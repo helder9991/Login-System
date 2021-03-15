@@ -1,7 +1,9 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import User from '../models/User';
+import authConfig from '../config/auth';
 import AppError from '../errors/AppError';
 
 interface IProps {
@@ -14,17 +16,10 @@ interface IProps {
             ddd: string;
         },
     ];
-    token: string;
 }
 
 class CreateUserService {
-    async execute({
-        nome,
-        email,
-        senha,
-        telefones,
-        token,
-    }: IProps): Promise<User> {
+    async execute({ nome, email, senha, telefones }: IProps): Promise<User> {
         const userRepository = getRepository(User);
 
         const userExists = await userRepository.findOne({
@@ -33,6 +28,7 @@ class CreateUserService {
 
         if (userExists) throw new AppError('E-mail já existente.', 400);
 
+        // Gera a senha em hash
         const hashedPassword = await hash(senha, 8);
         const newUser = userRepository.create({
             nome,
@@ -42,8 +38,16 @@ class CreateUserService {
             ultimo_login: new Date(),
             data_atualizacao: new Date(),
             data_criacao: new Date(),
-            token,
         });
+
+        // Cria o token
+        const { expiresIn, secret } = authConfig.jwt;
+        const token = sign({ id: newUser.id }, secret, {
+            subject: email,
+            expiresIn,
+        });
+
+        newUser.token = token;
 
         await userRepository.save(newUser);
 
