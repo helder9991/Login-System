@@ -3,11 +3,23 @@ import * as Yup from 'yup';
 
 import CreateUserTokenService from '../services/CreateUserTokenService';
 import CreateUserService from '../services/CreateUserService';
+import ShowUserService from '../services/ShowUserService';
 import AppError from '../errors/AppError';
 
 class UserController {
-    index(req: Request, res: Response): void {
-        res.json({ message: 'index' });
+    async show(req: Request, res: Response): Promise<void> {
+        const { user_id } = req.params;
+
+        const authHeader = req.headers.authorization;
+
+        // Verifica se o token existe
+        if (!authHeader) throw new AppError('Não autorizado.', 401);
+
+        const [, token] = authHeader.split(' ');
+
+        const user = await ShowUserService.execute({ token, user_id });
+
+        res.json(user);
     }
 
     async store(req: Request, res: Response): Promise<void> {
