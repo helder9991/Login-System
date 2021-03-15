@@ -8,7 +8,7 @@
     "username": "root",
     "password": "docker",
     "useUnifiedTopology": true,
-    "entities": ["./src/models/*.ts"],
+    "entities": ["./**/models/*.*"],
     "migrations": ["./src/database/migrations/*.ts"],
     "cli": {
         "migrationsDir": "./src/database/migrations"
