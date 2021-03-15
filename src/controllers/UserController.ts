@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as Yup from 'yup';
 
-import CreateUserTokenService from '../services/CreateUserTokenService';
 import CreateUserService from '../services/CreateUserService';
 import ShowUserService from '../services/ShowUserService';
 import AppError from '../errors/AppError';
@@ -41,11 +40,8 @@ class UserController {
         if (!(await schema.isValid(req.body)))
             throw new AppError('Erro na validação da requisição.', 400);
 
-        // Gera o token do usuario
-        const token = CreateUserTokenService.execute(req.body);
-
         // Cria o usuario no banco de dados
-        const user = await CreateUserService.execute({ ...req.body, token });
+        const user = await CreateUserService.execute({ ...req.body });
 
         res.status(201).json(user);
     }
