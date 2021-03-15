@@ -21,6 +21,18 @@ class User {
             ddd: string;
         },
     ];
+
+    @Column({ type: 'date' })
+    data_criacao: Date;
+
+    @Column({ type: 'date' })
+    data_atualizacao: Date;
+
+    @Column({ type: 'date' })
+    ultimo_login: Date;
+
+    @Column()
+    token: string;
 }
 
 export default User;
