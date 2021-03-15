@@ -22,6 +22,7 @@
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
         "no-console": "off",
+        "camelcase": "off",
         "@typescript-eslint/no-use-before-define": [
             "error"
         ],
