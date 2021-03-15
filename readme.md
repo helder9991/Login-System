@@ -5,6 +5,8 @@
 
 # Introdução
   Esse é um sistema simples de login, que utiliza jwt e criptografa a senha do usuario com bcrypt.
+  
+  **Nota: Este é um sistema para fins didáticos, um sistema em produção não deve retornar a senha do usuario!!**
 
 # Como utilizar
 1 -  Crie o banco de dados com o nome ``sys``
