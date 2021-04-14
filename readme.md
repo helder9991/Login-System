@@ -19,6 +19,10 @@
 
 
 3 - Rode o commando na pasta raiz do projeto:
+  - ```npm run typeorm migration:run``` ou ```yarn typeorm migration:run```
+ 
+ 
+4 - Rode o commando na pasta raiz do projeto:
   - ```npm run dev``` ou ```yarn dev```
 
   Nota: Este comando irá iniciar o backend
